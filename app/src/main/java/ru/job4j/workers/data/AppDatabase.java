@@ -8,7 +8,7 @@ import ru.job4j.workers.data.dao.WorkerDao;
 import ru.job4j.workers.data.entity.Specialty;
 import ru.job4j.workers.data.entity.Worker;
 
-@Database(entities = {Worker.class, Specialty.class}, version = 1)
+@Database(entities = {Worker.class, Specialty.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract WorkerDao workerDao();

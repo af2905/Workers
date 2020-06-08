@@ -1,8 +1,10 @@
-package ru.job4j.workers;
+package ru.job4j.workers.presentation.view;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import ru.job4j.workers.R;
 
 public class MainActivity extends AppCompatActivity {
 

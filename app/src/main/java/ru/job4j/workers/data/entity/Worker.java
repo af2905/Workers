@@ -1,59 +1,50 @@
 package ru.job4j.workers.data.entity;
 
-import android.graphics.Bitmap;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "workers", foreignKeys = @ForeignKey(entity = Specialty.class, parentColumns = "id", childColumns = "specialty_id"))
+import java.util.List;
+import java.util.Objects;
+
+/*@Entity(tableName = "workers", foreignKeys = @ForeignKey(entity = Specialty.class, parentColumns = "id", childColumns = "specialty_id"))*/
+@Entity(tableName = "workers")
 public class Worker {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private Integer id;
 
     @SerializedName("f_name")
-    @ColumnInfo(name = "first_name")
+    @ColumnInfo(name = "f_name")
     private String firstName;
 
     @SerializedName("l_name")
-    @ColumnInfo(name = "last_name")
+    @ColumnInfo(name = "l_name")
     private String lastName;
 
     private String birthday;
 
     @SerializedName("avatr_url")
-    @Ignore
-    private Bitmap avatar;
+    private String avatarUrl;
 
-    @ColumnInfo(name = "specialty_id")
-    private long specialtyId;
+    @TypeConverters({SpecialtyConverter.class})
+    private List<Specialty> specialty;
 
-    public Worker(long id, String firstName, String lastName, String birthday, Bitmap avatar, long specialtyId) {
-        this.id = id;
+    public Worker(String firstName, String lastName, String birthday, String avatarUrl, List<Specialty> specialty) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.avatar = avatar;
-        this.specialtyId = specialtyId;
+        this.avatarUrl = avatarUrl;
+        this.specialty = specialty;
     }
 
-    public Worker(String firstName, String lastName, String birthday, Bitmap avatar, long specialtyId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.avatar = avatar;
-        this.specialtyId = specialtyId;
-    }
-
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,12 +72,42 @@ public class Worker {
         this.birthday = birthday;
     }
 
-    public long getSpecialtyId() {
-        return specialtyId;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setSpecialtyId(long specialtyId) {
-        this.specialtyId = specialtyId;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public List<Specialty> getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(List<Specialty> specialty) {
+        this.specialty = specialty;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Worker worker = (Worker) o;
+        return id.equals(worker.id)
+                && Objects.equals(firstName, worker.firstName)
+                && Objects.equals(lastName, worker.lastName)
+                && Objects.equals(birthday, worker.birthday)
+                && Objects.equals(avatarUrl, worker.avatarUrl)
+                && Objects.equals(specialty, worker.specialty);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, birthday, avatarUrl, specialty);
     }
 }
 

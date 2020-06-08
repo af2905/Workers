@@ -1,5 +1,6 @@
 package ru.job4j.workers.data.dao;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -9,7 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import ru.job4j.workers.data.entity.Worker;
-
+@Dao
 public interface WorkerDao {
 
     @Query("SELECT * FROM workers")
