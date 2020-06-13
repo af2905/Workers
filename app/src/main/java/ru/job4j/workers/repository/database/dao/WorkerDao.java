@@ -1,4 +1,4 @@
-package ru.job4j.workers.data.dao;
+package ru.job4j.workers.repository.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,7 +9,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import ru.job4j.workers.data.entity.Worker;
+import ru.job4j.workers.repository.database.entity.Worker;
+
 @Dao
 public interface WorkerDao {
 
@@ -17,13 +18,13 @@ public interface WorkerDao {
     List<Worker> getAll();
 
     @Query("SELECT * FROM workers WHERE id = :id")
-    Worker getById(long id);
+    Worker getById(Integer id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Worker worker);
+    void insert(Worker worker);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    List<Long> insert(List<Worker> workers);
+    void insertList(List<Worker> workers);
 
     @Update
     void update(Worker worker);

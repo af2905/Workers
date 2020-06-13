@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Workers</string>
+    <string name="specialty">specialty</string>
+    <string name="avatar">avatar</string>
 </resources>

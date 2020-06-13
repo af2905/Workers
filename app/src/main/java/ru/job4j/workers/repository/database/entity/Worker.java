@@ -1,4 +1,4 @@
-package ru.job4j.workers.data.entity;
+package ru.job4j.workers.repository.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,11 +10,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
-/*@Entity(tableName = "workers", foreignKeys = @ForeignKey(entity = Specialty.class, parentColumns = "id", childColumns = "specialty_id"))*/
+import ru.job4j.workers.repository.database.converter.SpecialtyConverter;
+import ru.job4j.workers.repository.database.pojo.Specialty;
+
 @Entity(tableName = "workers")
 public class Worker {
     @PrimaryKey(autoGenerate = true)
-    private Integer id;
+    private int id;
 
     @SerializedName("f_name")
     @ColumnInfo(name = "f_name")
@@ -40,7 +42,7 @@ public class Worker {
         this.specialty = specialty;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -97,7 +99,7 @@ public class Worker {
             return false;
         }
         Worker worker = (Worker) o;
-        return id.equals(worker.id)
+        return id == worker.id
                 && Objects.equals(firstName, worker.firstName)
                 && Objects.equals(lastName, worker.lastName)
                 && Objects.equals(birthday, worker.birthday)
@@ -110,4 +112,3 @@ public class Worker {
         return Objects.hash(id, firstName, lastName, birthday, avatarUrl, specialty);
     }
 }
-

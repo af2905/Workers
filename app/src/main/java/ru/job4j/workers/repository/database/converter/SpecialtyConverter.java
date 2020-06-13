@@ -1,4 +1,4 @@
-package ru.job4j.workers.data.entity;
+package ru.job4j.workers.repository.database.converter;
 
 import androidx.room.TypeConverter;
 
@@ -7,6 +7,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
+import ru.job4j.workers.repository.database.pojo.Specialty;
 
 public class SpecialtyConverter {
     @TypeConverter

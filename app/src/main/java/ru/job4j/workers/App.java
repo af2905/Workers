@@ -4,80 +4,59 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.squareup.picasso.BuildConfig;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import ru.job4j.workers.data.ApiService;
-import ru.job4j.workers.data.AppDatabase;
-import ru.job4j.workers.data.DataRepository;
-import ru.job4j.workers.domain.DataInteractor;
+import ru.job4j.workers.di.component.ApiComponent;
+import ru.job4j.workers.di.component.DaggerApiComponent;
+import ru.job4j.workers.di.component.DaggerDaoComponent;
+import ru.job4j.workers.di.component.DaggerRepositoryComponent;
+import ru.job4j.workers.di.component.DaggerViewModelComponent;
+import ru.job4j.workers.di.component.DaoComponent;
+import ru.job4j.workers.di.component.RepositoryComponent;
+import ru.job4j.workers.di.component.ViewModelComponent;
+import ru.job4j.workers.di.module.ApiModule;
+import ru.job4j.workers.di.module.DaoModule;
+import ru.job4j.workers.di.module.RepositoryModule;
+import ru.job4j.workers.di.module.ViewModelModule;
+import ru.job4j.workers.repository.database.AppDatabase;
 
 public class App extends Application {
-    private static App instance;
-    private DataInteractor dataInteractor;
+    private ViewModelComponent viewModelComponent;
     private AppDatabase database;
-    private ApiService apiService;
-    private DataRepository dataRepository = new DataRepository();
-    private static final String BASE_URL = "https://raw.githubusercontent.com/af2905/jsons/master/";
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        initRetrofit();
-        initDatabase();
-        initInteractor();
+        initRoom();
+        initDagger();
     }
 
-    private void initDatabase() {
+    private void initRoom() {
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .build();
     }
 
-    private void initRetrofit() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+    public ViewModelComponent getViewModelComponent() {
+        return viewModelComponent;
+    }
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
+    private void initDagger() {
+        ApiComponent apiComponent = DaggerApiComponent.builder()
+                .apiModule(new ApiModule())
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        DaoComponent daoComponent = DaggerDaoComponent.builder()
+                .daoModule(new DaoModule(database))
                 .build();
 
-        apiService = retrofit.create(ApiService.class);
-    }
+        RepositoryComponent repositoryComponent = DaggerRepositoryComponent.builder()
+                .apiComponent(apiComponent)
+                .daoComponent(daoComponent)
+                .repositoryModule(new RepositoryModule())
+                .build();
 
-    private void initInteractor() {
-        dataInteractor = new DataInteractor(apiService, dataRepository);
-    }
-
-
-    public static App getInstance() {
-        return instance;
-    }
-
-    public AppDatabase getDatabase() {
-        return database;
-    }
-
-    public ApiService getApiService() {
-        return apiService;
-    }
-
-    public DataInteractor getDataInteractor() {
-        return dataInteractor;
+        viewModelComponent = DaggerViewModelComponent.builder()
+                .repositoryComponent(repositoryComponent)
+                .viewModelModule(new ViewModelModule(this))
+                .build();
     }
 }
-
-
-
-

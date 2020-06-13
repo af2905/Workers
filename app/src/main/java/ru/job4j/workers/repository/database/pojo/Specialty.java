@@ -1,17 +1,12 @@
-package ru.job4j.workers.data.entity;
-
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+package ru.job4j.workers.repository.database.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
-@Entity(tableName = "specialties")
 public class Specialty {
-    @PrimaryKey
     @SerializedName("specialty_id")
-    private Integer specialtyId;
+    private int specialtyId;
 
     private String name;
 
@@ -20,7 +15,7 @@ public class Specialty {
         this.name = name;
     }
 
-    public Integer getSpecialtyId() {
+    public int getSpecialtyId() {
         return specialtyId;
     }
 
@@ -45,7 +40,7 @@ public class Specialty {
             return false;
         }
         Specialty specialty = (Specialty) o;
-        return specialtyId.equals(specialty.specialtyId)
+        return specialtyId == specialty.specialtyId
                 && Objects.equals(name, specialty.name);
     }
 
