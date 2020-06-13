@@ -9,11 +9,9 @@ import ru.job4j.workers.presentation.widget.SingleLiveEvent;
 import ru.job4j.workers.repository.AppRepository;
 import ru.job4j.workers.repository.database.entity.Worker;
 
-
 public class WorkersViewModel extends BaseViewModel {
     private AppRepository repository;
     private SingleLiveEvent<Worker> liveDataItems = new SingleLiveEvent<>();
-
 
     public WorkersViewModel(@NonNull Application application, AppRepository repository) {
         super(application);

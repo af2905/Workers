@@ -32,6 +32,7 @@ public class App extends Application {
 
     private void initRoom() {
         database = Room.databaseBuilder(this, AppDatabase.class, "database")
+                .allowMainThreadQueries()
                 .build();
     }
 
