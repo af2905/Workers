@@ -1,5 +1,7 @@
 package ru.job4j.workers.di.module;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
@@ -18,7 +20,7 @@ import ru.job4j.workers.repository.server.ServerCommunicator;
 
 @Module
 public class ApiModule {
-    private static final String BASE_URL = "https://raw.githubusercontent.com/test-tasks/task-json/master/";
+    private static final String BASE_URL = "https://raw.githubusercontent.com/af2905/jsons/master/";
 
     @Provides
     @ApiScope
@@ -52,9 +54,15 @@ public class ApiModule {
                 .addInterceptor(interceptor)
                 .build();
 
+        Gson gson =
+                new GsonBuilder()
+                        .setLenient()
+                        .create();
+
+
         return new Retrofit.Builder()
                 .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
     }
 }

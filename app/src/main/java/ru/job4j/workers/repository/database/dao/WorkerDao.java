@@ -29,6 +29,9 @@ public interface WorkerDao {
     @Update
     void update(Worker worker);
 
+    @Update
+    void updateAll(List<Worker> workers);
+
     @Delete
     void delete(Worker worker);
 }

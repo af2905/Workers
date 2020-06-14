@@ -8,7 +8,7 @@ import ru.job4j.workers.repository.database.entity.Worker;
 
 public class WorkersList {
     @SerializedName("response")
-    private List<Worker> workers;
+    private List<Worker> workers = null;
 
     public List<Worker> getWorkers() {
         return workers;

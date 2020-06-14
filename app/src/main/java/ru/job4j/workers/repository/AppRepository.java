@@ -21,8 +21,10 @@ public class AppRepository {
 
     public Single<List<Worker>> getAllWorkers() {
         return serverCommunicator.getAllWorkers()
-                .flatMap(workersListResponse -> {
-                    workerDao.insertList(Objects.requireNonNull(workersListResponse.body()).getWorkers());
+                .flatMap(list -> {
+                    if (workerDao.getAll().size() == 0) {
+                        workerDao.insertList(Objects.requireNonNull(list.body()).getWorkers());
+                    }
                     return Single.just(workerDao.getAll());
                 })
                 .subscribeOn(Schedulers.io())

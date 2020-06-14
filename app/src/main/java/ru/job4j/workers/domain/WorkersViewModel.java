@@ -5,13 +5,15 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 import ru.job4j.workers.presentation.widget.SingleLiveEvent;
 import ru.job4j.workers.repository.AppRepository;
 import ru.job4j.workers.repository.database.entity.Worker;
 
 public class WorkersViewModel extends BaseViewModel {
     private AppRepository repository;
-    private SingleLiveEvent<Worker> liveDataItems = new SingleLiveEvent<>();
+    private SingleLiveEvent<List<Worker>> liveDataItems = new SingleLiveEvent<>();
 
     public WorkersViewModel(@NonNull Application application, AppRepository repository) {
         super(application);
@@ -20,10 +22,10 @@ public class WorkersViewModel extends BaseViewModel {
 
     @SuppressLint("CheckResult")
     public void getAllWorkers() {
-        repository.getAllWorkers().subscribe(list -> liveDataItems.setValue((Worker) list));
+        repository.getAllWorkers().subscribe(list -> liveDataItems.setValue(list));
     }
 
-    public SingleLiveEvent<Worker> getLiveDataItems() {
+    public SingleLiveEvent<List<Worker>> getLiveDataItems() {
         return liveDataItems;
     }
 }
