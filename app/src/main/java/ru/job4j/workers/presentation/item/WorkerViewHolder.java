@@ -32,17 +32,8 @@ public class WorkerViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setupItem() {
-        TextView firstName, lastName, birthday, specialty;
-        firstName = itemView.findViewById(R.id.first_name);
-        lastName = itemView.findViewById(R.id.last_name);
-        birthday = itemView.findViewById(R.id.birthday);
-        specialty = itemView.findViewById(R.id.specialty);
-
-        firstName.setText(worker.getFirstName());
-        lastName.setText(worker.getLastName());
-        birthday.setText(worker.getBirthday());
-        specialty.setText("");
-
+        TextView name = itemView.findViewById(R.id.item);
+        name.setText(String.format("%s %s", worker.getFirstName(), worker.getLastName()));
         itemView.setOnClickListener(openDetail);
     }
 }

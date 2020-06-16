@@ -1,6 +1,5 @@
 package ru.job4j.workers.presentation.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,18 +15,16 @@ import ru.job4j.workers.repository.database.entity.Worker;
 
 public class WorkerAdapter extends BaseAdapter<WorkerViewHolder, Worker, IWorkerItemClickListener> {
     private List<Worker> workers;
-    private Context context;
 
-    public WorkerAdapter(Context context, List<Worker> list) {
-        super(context, list);
+    public WorkerAdapter(List<Worker> list) {
+        super(list);
         this.workers = list;
-        this.context = context;
     }
 
     @NonNull
     @Override
     public WorkerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new WorkerViewHolder(LayoutInflater.from(context).inflate(R.layout.worker_template, parent, false));
+        return new WorkerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false));
     }
 
     @Override

@@ -1,19 +1,15 @@
 package ru.job4j.workers.presentation.base;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder, M, L> extends RecyclerView.Adapter<VH> {
-    protected Context context;
     protected List<M> list;
     protected L itemClickListener;
 
-    public BaseAdapter(Context context, List<M> list) {
-        this.context = context;
+    public BaseAdapter(List<M> list) {
         this.list = list;
     }
 

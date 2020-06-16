@@ -22,7 +22,6 @@ public class App extends Application {
     private ViewModelComponent viewModelComponent;
     private AppDatabase database;
 
-
     @Override
     public void onCreate() {
         super.onCreate();
