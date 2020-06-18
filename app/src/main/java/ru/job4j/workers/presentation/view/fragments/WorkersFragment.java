@@ -20,6 +20,7 @@ import ru.job4j.workers.di.component.ViewModelComponent;
 import ru.job4j.workers.domain.WorkersViewModel;
 import ru.job4j.workers.presentation.adapter.WorkerAdapter;
 import ru.job4j.workers.presentation.base.BaseFragment;
+import ru.job4j.workers.presentation.item.DividerItemDecoration;
 import ru.job4j.workers.presentation.item.IWorkerItemClickListener;
 import ru.job4j.workers.repository.database.entity.Worker;
 
@@ -50,6 +51,9 @@ public class WorkersFragment extends BaseFragment {
     private void initRecyclerView(List<Worker> workers) {
         WorkerAdapter workerAdapter = new WorkerAdapter(workers);
         workerAdapter.setItemClickListener(clickListener);
+        RecyclerView.ItemDecoration decoration
+                = new DividerItemDecoration(8, 16);
+        recycler.addItemDecoration(decoration);
         recycler.setLayoutManager(manager);
         recycler.setAdapter(workerAdapter);
     }

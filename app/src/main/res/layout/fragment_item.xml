@@ -6,11 +6,44 @@
     android:layout_height="wrap_content"
     app:cardElevation="2dp">
 
-    <TextView
-        android:id="@+id/item"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:gravity="center"
-        tools:text="@string/specialty" />
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/small_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/avatar"
+                tools:src="@drawable/ic_baseline_person_outline_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="8dp"
+                android:textStyle="bold"
+                tools:text="@string/specialty" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

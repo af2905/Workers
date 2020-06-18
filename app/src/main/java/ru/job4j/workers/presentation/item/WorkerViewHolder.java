@@ -1,6 +1,7 @@
 package ru.job4j.workers.presentation.item;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,9 @@ public class WorkerViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setupItem() {
+        ImageView smallIcon = itemView.findViewById(R.id.small_icon);
         TextView name = itemView.findViewById(R.id.item);
+        smallIcon.setImageResource(R.drawable.ic_baseline_person_outline_24);
         name.setText(String.format("%s %s", worker.getFirstName(), worker.getLastName()));
         itemView.setOnClickListener(openDetail);
     }
