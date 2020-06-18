@@ -1,5 +1,9 @@
 package ru.job4j.workers.repository;
 
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -29,5 +33,19 @@ public class AppRepository {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Worker getWorker(int id) {
+        return workerDao.getById(id);
+    }
+
+    public void loadImg(String url, int placeholder, int error, ImageView imageView) {
+        Picasso.get()
+                .load((url))
+                .placeholder(placeholder)
+                .error(error)
+                .resize(300, 300)
+                .centerCrop()
+                .into(imageView);
     }
 }
