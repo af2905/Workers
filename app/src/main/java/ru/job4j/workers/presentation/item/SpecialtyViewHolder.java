@@ -8,26 +8,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.job4j.workers.R;
-import ru.job4j.workers.repository.database.entity.Worker;
+import ru.job4j.workers.repository.database.pojo.Specialty;
 
-public class WorkerViewHolder extends RecyclerView.ViewHolder {
+public class SpecialtyViewHolder extends RecyclerView.ViewHolder {
     private View itemView;
-    private Worker worker;
-    private ISpecialtyAndWorkerClickListener<Worker> clickListener;
+    private Specialty specialty;
+    private ISpecialtyAndWorkerClickListener<Specialty> clickListener;
     private View.OnClickListener openDetail = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            clickListener.openDetailInfo(worker);
+            clickListener.openDetailInfo(specialty);
         }
     };
 
-    public WorkerViewHolder(@NonNull View itemView) {
+    public SpecialtyViewHolder(@NonNull View itemView) {
         super(itemView);
         this.itemView = itemView;
     }
 
-    public void bind(Worker worker, ISpecialtyAndWorkerClickListener<Worker> clickListener) {
-        this.worker = worker;
+    public void bind(Specialty specialty, ISpecialtyAndWorkerClickListener<Specialty> clickListener) {
+        this.specialty = specialty;
         this.clickListener = clickListener;
         setupItem();
     }
@@ -35,8 +35,8 @@ public class WorkerViewHolder extends RecyclerView.ViewHolder {
     private void setupItem() {
         ImageView smallIcon = itemView.findViewById(R.id.small_icon);
         TextView name = itemView.findViewById(R.id.item);
-        smallIcon.setImageResource(R.drawable.ic_baseline_person_outline_24);
-        name.setText(String.format("%s %s", worker.getFirstName(), worker.getLastName()));
+        smallIcon.setImageResource(R.drawable.ic_baseline_format_list_bulleted_24);
+        name.setText(String.format("%ss", specialty.getName()));
         itemView.setOnClickListener(openDetail);
     }
 }

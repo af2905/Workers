@@ -9,14 +9,14 @@ import java.util.List;
 
 import ru.job4j.workers.R;
 import ru.job4j.workers.presentation.base.BaseAdapter;
-import ru.job4j.workers.presentation.item.IWorkerItemClickListener;
+import ru.job4j.workers.presentation.item.ISpecialtyAndWorkerClickListener;
 import ru.job4j.workers.presentation.item.WorkerViewHolder;
 import ru.job4j.workers.repository.database.entity.Worker;
 
-public class WorkerAdapter extends BaseAdapter<WorkerViewHolder, Worker, IWorkerItemClickListener> {
+public class WorkersAdapter extends BaseAdapter<WorkerViewHolder, Worker, ISpecialtyAndWorkerClickListener> {
     private List<Worker> workers;
 
-    public WorkerAdapter(List<Worker> list) {
+    public WorkersAdapter(List<Worker> list) {
         super(list);
         this.workers = list;
     }

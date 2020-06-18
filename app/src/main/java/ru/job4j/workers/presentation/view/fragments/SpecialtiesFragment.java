@@ -18,19 +18,19 @@ import javax.inject.Inject;
 import ru.job4j.workers.R;
 import ru.job4j.workers.di.component.ViewModelComponent;
 import ru.job4j.workers.domain.ApplicationViewModel;
-import ru.job4j.workers.presentation.adapter.WorkersAdapter;
+import ru.job4j.workers.presentation.adapter.SpecialtiesAdapter;
 import ru.job4j.workers.presentation.base.BaseFragment;
 import ru.job4j.workers.presentation.item.DividerItemDecoration;
 import ru.job4j.workers.presentation.item.ISpecialtyAndWorkerClickListener;
-import ru.job4j.workers.repository.database.entity.Worker;
+import ru.job4j.workers.repository.database.pojo.Specialty;
 
-public class WorkersFragment extends BaseFragment {
+public class SpecialtiesFragment extends BaseFragment {
     @Inject
-    protected ApplicationViewModel applicationViewModel;
+    ApplicationViewModel applicationViewModel;
     private RecyclerView recycler;
     private LinearLayoutManager manager;
-    protected CallbackForDetail callback;
-    private ISpecialtyAndWorkerClickListener<Worker> clickListener = worker -> openItemDetail(worker.getId());
+    protected CallbackForWorkersList callback;
+    private ISpecialtyAndWorkerClickListener<Specialty> clickListener = specialty -> openWorkersList(specialty.getSpecialtyId());
 
     @Nullable
     @Override
@@ -38,8 +38,9 @@ public class WorkersFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_row, container, false);
         recycler = view.findViewById(R.id.items_row);
         manager = new LinearLayoutManager(view.getContext());
-        applicationViewModel.getSelectedWorkers();
-        applicationViewModel.getLiveDataSelectedWorkers().observe(this, this::initRecyclerView);
+        applicationViewModel.getAllWorkers();
+        applicationViewModel.getAllSpecialties();
+        applicationViewModel.getLiveDataSpecialties().observe(this, this::initRecyclerView);
         return view;
     }
 
@@ -48,28 +49,28 @@ public class WorkersFragment extends BaseFragment {
         component.inject(this);
     }
 
-    private void initRecyclerView(List<Worker> workers) {
-        WorkersAdapter workersAdapter = new WorkersAdapter(workers);
-        workersAdapter.setItemClickListener(clickListener);
+    private void initRecyclerView(List<Specialty> specialties) {
+        SpecialtiesAdapter specialtiesAdapter = new SpecialtiesAdapter(specialties);
+        specialtiesAdapter.setItemClickListener(clickListener);
         RecyclerView.ItemDecoration decoration
                 = new DividerItemDecoration(8, 16);
         recycler.addItemDecoration(decoration);
         recycler.setLayoutManager(manager);
-        recycler.setAdapter(workersAdapter);
+        recycler.setAdapter(specialtiesAdapter);
     }
 
-    private void openItemDetail(int id) {
-        callback.openDetailClick(id);
+    private void openWorkersList(int id) {
+        callback.openWorkersListClick(id);
     }
 
-    public interface CallbackForDetail {
-        void openDetailClick(int id);
+    public interface CallbackForWorkersList {
+        void openWorkersListClick(int id);
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.callback = (CallbackForDetail) context;
+        this.callback = (CallbackForWorkersList) context;
     }
 
     @Override

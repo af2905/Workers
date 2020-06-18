@@ -16,14 +16,14 @@ import javax.inject.Inject;
 
 import ru.job4j.workers.R;
 import ru.job4j.workers.di.component.ViewModelComponent;
-import ru.job4j.workers.domain.WorkersViewModel;
+import ru.job4j.workers.domain.ApplicationViewModel;
 import ru.job4j.workers.presentation.base.BaseFragment;
 import ru.job4j.workers.repository.database.entity.Worker;
 import ru.job4j.workers.repository.database.pojo.Specialty;
 
 public class DetailFragment extends BaseFragment {
     @Inject
-    protected WorkersViewModel workersViewModel;
+    protected ApplicationViewModel applicationViewModel;
     private ImageView avatar;
     private TextView firstName;
     private TextView lastName;
@@ -48,7 +48,7 @@ public class DetailFragment extends BaseFragment {
     }
 
     private void showDetailInfo() {
-        Worker worker = workersViewModel.getLiveDataDetail();
+        Worker worker = applicationViewModel.getLiveDataDetail();
         List<Specialty> specialties = worker.getSpecialty();
         firstName.setText(worker.getFirstName());
         lastName.setText(worker.getLastName());
@@ -59,7 +59,7 @@ public class DetailFragment extends BaseFragment {
         String url = worker.getAvatarUrl();
         int placeholder = R.drawable.ic_baseline_photo_24;
         int error = R.drawable.ic_baseline_error_outline_24;
-        workersViewModel.loadImgFromNet(url, placeholder, error, avatar);
+        applicationViewModel.loadImgFromNet(url, placeholder, error, avatar);
     }
 
     @Override
