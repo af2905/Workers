@@ -11,8 +11,8 @@ import java.util.List;
 
 import ru.job4j.workers.presentation.widget.SingleLiveEvent;
 import ru.job4j.workers.repository.AppRepository;
+import ru.job4j.workers.repository.database.entity.Specialty;
 import ru.job4j.workers.repository.database.entity.Worker;
-import ru.job4j.workers.repository.database.pojo.Specialty;
 
 public class ApplicationViewModel extends BaseViewModel {
     private AppRepository repository;

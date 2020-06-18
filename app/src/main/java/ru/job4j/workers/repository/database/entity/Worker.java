@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 import ru.job4j.workers.repository.database.converter.SpecialtyConverter;
-import ru.job4j.workers.repository.database.pojo.Specialty;
 
 @Entity(tableName = "workers")
 public class Worker {

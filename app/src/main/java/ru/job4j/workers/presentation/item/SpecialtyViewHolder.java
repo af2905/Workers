@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.job4j.workers.R;
-import ru.job4j.workers.repository.database.pojo.Specialty;
+import ru.job4j.workers.repository.database.entity.Specialty;
 
 public class SpecialtyViewHolder extends RecyclerView.ViewHolder {
     private View itemView;

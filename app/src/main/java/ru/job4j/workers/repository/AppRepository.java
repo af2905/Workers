@@ -13,18 +13,21 @@ import java.util.Set;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import ru.job4j.workers.repository.database.dao.SpecialtyDao;
 import ru.job4j.workers.repository.database.dao.WorkerDao;
+import ru.job4j.workers.repository.database.entity.Specialty;
 import ru.job4j.workers.repository.database.entity.Worker;
-import ru.job4j.workers.repository.database.pojo.Specialty;
 import ru.job4j.workers.repository.server.ServerCommunicator;
 
 public class AppRepository {
     private ServerCommunicator serverCommunicator;
     private WorkerDao workerDao;
+    private SpecialtyDao specialtyDao;
 
-    public AppRepository(ServerCommunicator serverCommunicator, WorkerDao workerDao) {
+    public AppRepository(ServerCommunicator serverCommunicator, WorkerDao workerDao, SpecialtyDao specialtyDao) {
         this.serverCommunicator = serverCommunicator;
         this.workerDao = workerDao;
+        this.specialtyDao = specialtyDao;
     }
 
     public Single<List<Worker>> getAllWorkers() {
@@ -51,7 +54,8 @@ public class AppRepository {
                         specialties.addAll(worker.getSpecialty());
                     }
                     List<Specialty> list = new ArrayList<>(specialties);
-                    return Single.just(list);
+                    specialtyDao.insertList(list);
+                    return Single.just(specialtyDao.getAll());
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

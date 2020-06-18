@@ -11,7 +11,7 @@ import ru.job4j.workers.R;
 import ru.job4j.workers.presentation.base.BaseAdapter;
 import ru.job4j.workers.presentation.item.ISpecialtyAndWorkerClickListener;
 import ru.job4j.workers.presentation.item.SpecialtyViewHolder;
-import ru.job4j.workers.repository.database.pojo.Specialty;
+import ru.job4j.workers.repository.database.entity.Specialty;
 
 public class SpecialtiesAdapter extends BaseAdapter<SpecialtyViewHolder, Specialty, ISpecialtyAndWorkerClickListener> {
     private List<Specialty> specialties;

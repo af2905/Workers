@@ -1,10 +1,15 @@
-package ru.job4j.workers.repository.database.pojo;
+package ru.job4j.workers.repository.database.entity;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+@Entity(tableName = "specialties")
 public class Specialty {
+    @PrimaryKey
     @SerializedName("specialty_id")
     private int specialtyId;
 

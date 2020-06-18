@@ -39,24 +39,28 @@
                 android:id="@+id/first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 tools:text="first name" />
 
             <TextView
                 android:id="@+id/last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 tools:text="last name" />
 
             <TextView
                 android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 tools:text="birthday" />
 
             <TextView
                 android:id="@+id/specialty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 tools:text="specialty" />
 
         </LinearLayout>

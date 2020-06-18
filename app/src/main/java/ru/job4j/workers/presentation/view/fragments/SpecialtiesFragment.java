@@ -22,7 +22,7 @@ import ru.job4j.workers.presentation.adapter.SpecialtiesAdapter;
 import ru.job4j.workers.presentation.base.BaseFragment;
 import ru.job4j.workers.presentation.item.DividerItemDecoration;
 import ru.job4j.workers.presentation.item.ISpecialtyAndWorkerClickListener;
-import ru.job4j.workers.repository.database.pojo.Specialty;
+import ru.job4j.workers.repository.database.entity.Specialty;
 
 public class SpecialtiesFragment extends BaseFragment {
     @Inject

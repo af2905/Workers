@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import ru.job4j.workers.repository.database.pojo.Specialty;
+import ru.job4j.workers.repository.database.entity.Specialty;
 
 public class SpecialtyConverter {
     @TypeConverter

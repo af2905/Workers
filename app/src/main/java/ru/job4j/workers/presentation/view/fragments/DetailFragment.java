@@ -18,8 +18,8 @@ import ru.job4j.workers.R;
 import ru.job4j.workers.di.component.ViewModelComponent;
 import ru.job4j.workers.domain.ApplicationViewModel;
 import ru.job4j.workers.presentation.base.BaseFragment;
+import ru.job4j.workers.repository.database.entity.Specialty;
 import ru.job4j.workers.repository.database.entity.Worker;
-import ru.job4j.workers.repository.database.pojo.Specialty;
 
 public class DetailFragment extends BaseFragment {
     @Inject
@@ -50,11 +50,12 @@ public class DetailFragment extends BaseFragment {
     private void showDetailInfo() {
         Worker worker = applicationViewModel.getLiveDataDetail();
         List<Specialty> specialties = worker.getSpecialty();
-        firstName.setText(worker.getFirstName());
-        lastName.setText(worker.getLastName());
-        birthday.setText(worker.getBirthday());
+        firstName.setText(String.format("Name: %s", worker.getFirstName()));
+        lastName.setText(String.format("Surname: %s", worker.getLastName()));
+        birthday.setText(String.format("Date of Birth: %s", worker.getBirthday()));
+        specialty.setText(R.string.specialty_title_for_detail);
         for (Specialty s : specialties) {
-            specialty.setText(String.format("%s\n", s.getName()));
+            specialty.append(String.format("\n%s", s.getName()));
         }
         String url = worker.getAvatarUrl();
         int placeholder = R.drawable.ic_baseline_photo_24;
