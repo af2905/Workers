@@ -5,6 +5,7 @@ import android.app.Application;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class ApplicationViewModel extends BaseViewModel {
     private SingleLiveEvent<List<Worker>> liveDataWorkers = new SingleLiveEvent<>();
     private SingleLiveEvent<List<Specialty>> liveDataSpecialties = new SingleLiveEvent<>();
     private SingleLiveEvent<List<Worker>> liveDataSelectedWorkers = new SingleLiveEvent<>();
-    private MutableLiveData<Integer> liveDataWorkerId = new MutableLiveData<>();
     private MutableLiveData<Integer> liveDataSpecialtyId = new MutableLiveData<>();
+    private MutableLiveData<Integer> liveDataWorkerId = new MutableLiveData<>();
 
     public ApplicationViewModel(@NonNull Application application, AppRepository repository) {
         super(application);
@@ -47,12 +48,12 @@ public class ApplicationViewModel extends BaseViewModel {
         repository.loadImg(url, placeholder, error, imageView);
     }
 
-    public SingleLiveEvent<List<Specialty>> getLiveDataSpecialties() {
-        return liveDataSpecialties;
-    }
-
     public SingleLiveEvent<List<Worker>> getLiveDataSelectedWorkers() {
         return liveDataSelectedWorkers;
+    }
+
+    public LiveData<List<Specialty>> getLiveDataSpecialties() {
+        return liveDataSpecialties;
     }
 
     public void setLiveDataWorkerId(MutableLiveData<Integer> liveDataWorkerId) {

@@ -21,7 +21,6 @@ public class SpecialtiesAdapter extends BaseAdapter<SpecialtyViewHolder, Special
         this.specialties = list;
     }
 
-
     @NonNull
     @Override
     public SpecialtyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

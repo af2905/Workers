@@ -11,6 +11,7 @@ import ru.job4j.workers.presentation.view.fragments.WorkersFragment;
 @ViewModelScope
 @Component(modules = {ViewModelModule.class}, dependencies = {RepositoryComponent.class})
 public interface ViewModelComponent {
+
     void inject(MainActivity activity);
 
     void inject(SpecialtiesFragment fragment);

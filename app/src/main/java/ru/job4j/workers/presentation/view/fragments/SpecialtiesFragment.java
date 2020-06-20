@@ -29,7 +29,7 @@ public class SpecialtiesFragment extends BaseFragment {
     ApplicationViewModel applicationViewModel;
     private RecyclerView recycler;
     private LinearLayoutManager manager;
-    protected CallbackForWorkersList callback;
+    protected CallbackForWorkers callback;
     private ISpecialtyAndWorkerClickListener<Specialty> clickListener = specialty -> openWorkersList(specialty.getSpecialtyId());
 
     @Nullable
@@ -38,7 +38,6 @@ public class SpecialtiesFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_row, container, false);
         recycler = view.findViewById(R.id.items_row);
         manager = new LinearLayoutManager(view.getContext());
-        applicationViewModel.getAllWorkers();
         applicationViewModel.getAllSpecialties();
         applicationViewModel.getLiveDataSpecialties().observe(this, this::initRecyclerView);
         return view;
@@ -63,14 +62,14 @@ public class SpecialtiesFragment extends BaseFragment {
         callback.openWorkersListClick(id);
     }
 
-    public interface CallbackForWorkersList {
+    public interface CallbackForWorkers {
         void openWorkersListClick(int id);
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.callback = (CallbackForWorkersList) context;
+        this.callback = (CallbackForWorkers) context;
     }
 
     @Override
