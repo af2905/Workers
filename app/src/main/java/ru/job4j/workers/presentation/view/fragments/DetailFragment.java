@@ -50,9 +50,9 @@ public class DetailFragment extends BaseFragment {
     private void showDetailInfo() {
         Worker worker = applicationViewModel.getLiveDataDetail();
         List<Specialty> specialties = worker.getSpecialty();
-        firstName.setText(String.format("Name: %s", worker.getFirstName()));
-        lastName.setText(String.format("Surname: %s", worker.getLastName()));
-        birthday.setText(String.format("Date of Birth: %s", worker.getBirthday()));
+        firstName.setText(String.format("NAME: %s", worker.getFirstName()));
+        lastName.setText(String.format("SURNAME: %s", worker.getLastName()));
+        birthday.setText(String.format("DATE OF BIRTH: %s", worker.getBirthday()));
         specialty.setText(R.string.specialty_title_for_detail);
         for (Specialty s : specialties) {
             specialty.append(String.format("\n%s", s.getName()));

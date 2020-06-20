@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:padding="8dp"
-                android:textStyle="bold"
+                android:textColor="@android:color/black"
                 tools:text="@string/specialty" />
 
         </LinearLayout>

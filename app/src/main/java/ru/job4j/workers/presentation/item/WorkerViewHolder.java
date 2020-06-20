@@ -36,7 +36,8 @@ public class WorkerViewHolder extends RecyclerView.ViewHolder {
         ImageView smallIcon = itemView.findViewById(R.id.small_icon);
         TextView name = itemView.findViewById(R.id.item);
         smallIcon.setImageResource(R.drawable.ic_baseline_person_outline_24);
-        name.setText(String.format("%s %s", worker.getFirstName(), worker.getLastName()));
+        name.setText(String.format(
+                "%s %s", worker.getFirstName().toUpperCase(), worker.getLastName().toUpperCase()));
         itemView.setOnClickListener(openDetail);
     }
 }

@@ -36,7 +36,7 @@ public class SpecialtyViewHolder extends RecyclerView.ViewHolder {
         ImageView smallIcon = itemView.findViewById(R.id.small_icon);
         TextView name = itemView.findViewById(R.id.item);
         smallIcon.setImageResource(R.drawable.ic_baseline_format_list_bulleted_24);
-        name.setText(String.format("%ss", specialty.getName()));
+        name.setText(String.format("%sS", specialty.getName().toUpperCase()));
         itemView.setOnClickListener(openDetail);
     }
 }
